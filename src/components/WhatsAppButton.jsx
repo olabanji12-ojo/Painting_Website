@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const WhatsAppButton = () => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -6,30 +7,37 @@ const WhatsAppButton = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
       {/* Tooltip */}
-      <div 
-        className={`bg-gray-900 text-white text-xs rounded-lg px-3 py-1.5 transition-all duration-300 shadow-xl ${
-          showTooltip ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
-        }`}
-      >
-        Chat with us
-      </div>
+      <AnimatePresence>
+        {showTooltip && (
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-2xl border border-gray-800 whitespace-nowrap"
+          >
+            Chat with us
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Button */}
-      <a
-        href="https://wa.me/2348012345678"
+      <motion.a
+        href="https://wa.me/2348012345678?text=Hello%20ProFinish%20Painters,%20I'd%20like%20to%20get%20a%20free%20quote."
         target="_blank"
         rel="noopener noreferrer"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className="bg-green-500 hover:bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 active:scale-95 duration-200 group"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-colors hover:bg-green-600 group"
       >
         <svg 
           width="28" 
           height="28" 
           viewBox="0 0 24 24" 
           fill="none" 
-          stroke="white" 
-          strokeWidth="2" 
+          stroke="currentColor" 
+          strokeWidth="2.5" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
           className="group-hover:rotate-12 transition-transform"
@@ -38,7 +46,7 @@ const WhatsAppButton = () => {
           <path d="M14.05 2a9 9 0 0 1 8 7.94" />
           <path d="M14.05 6A5 5 0 0 1 18 10" />
         </svg>
-      </a>
+      </motion.a>
     </div>
   );
 };

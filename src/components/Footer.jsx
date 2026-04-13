@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Column 1 — Brand */}
           <div>
             <h3 className="text-white font-bold text-lg">ProFinish Painters</h3>
-            <p className="text-gray-400 text-sm mt-2 max-w-xs leading-relaxed">
+            <p className="text-gray-400 text-sm mt-3 max-w-xs leading-relaxed">
               Transforming Lagos spaces since 2016. Premium residential and commercial painting solutions you can trust.
             </p>
           </div>
@@ -42,8 +42,8 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4">Get In Touch</h4>
             <ul className="space-y-2 text-sm">
-              <li>+234 801 234 5678</li>
-              <li>info@profinishpainters.com</li>
+              <li><a href="tel:+2348012345678" className="hover:text-white transition-colors">+234 801 234 5678</a></li>
+              <li><a href="mailto:info@profinishpainters.com" className="hover:text-white transition-colors">info@profinishpainters.com</a></li>
               <li>Lagos, Nigeria</li>
             </ul>
           </div>

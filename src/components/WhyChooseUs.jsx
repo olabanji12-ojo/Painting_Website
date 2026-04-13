@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const WhyChooseUs = () => {
   const features = [
@@ -21,12 +22,36 @@ const WhyChooseUs = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <section id="about" className="py-12 md:py-20 bg-white">
+    <section id="about" className="py-12 md:py-20 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
         {/* Left Side: Text Content */}
-        <div>
+        <motion.div
+           initial={{ opacity: 0, x: -50 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8 }}
+        >
           <span className="text-blue-700 text-xs font-semibold tracking-widest uppercase mb-3 block">
             WHY CHOOSE US
           </span>
@@ -37,9 +62,19 @@ const WhyChooseUs = () => {
             ProFinish Painters has been transforming spaces across Lagos since 2016. Every project we take on is treated with the same attention to detail — whether it's a single bedroom or a 10-floor commercial building.
           </p>
 
-          <div className="mt-8 space-y-5">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mt-8 space-y-5"
+          >
             {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-4">
+              <motion.div 
+                key={index}
+                variants={itemVariants}
+                className="flex items-start gap-4"
+              >
                 <div className="mt-1 flex-shrink-0">
                   <CheckCircle2 className="w-5 h-5 text-blue-700" />
                 </div>
@@ -51,17 +86,30 @@ const WhyChooseUs = () => {
                     {feature.detail}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <button className="bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl mt-8 inline-block hover:bg-blue-800 transition shadow-lg shadow-blue-700/20">
+          <motion.a 
+            href="#contact"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl mt-8 inline-block hover:bg-blue-800 transition shadow-lg shadow-blue-700/20 active:scale-95"
+          >
             Book Free Consultation
-          </button>
-        </div>
+          </motion.a>
+        </motion.div>
 
         {/* Right Side: Image */}
-        <div className="h-[400px] md:h-[500px]">
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="h-[400px] md:h-[500px]"
+        >
           <div className="rounded-2xl overflow-hidden w-full h-full shadow-xl">
             <img 
               src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800" 
@@ -69,7 +117,7 @@ const WhyChooseUs = () => {
               className="w-full h-full object-cover select-none"
             />
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

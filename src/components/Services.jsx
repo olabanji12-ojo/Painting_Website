@@ -1,5 +1,6 @@
 import React from 'react';
 import { Home, Building, Briefcase, Paintbrush, Shield, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Services = () => {
   const services = [
@@ -35,11 +36,36 @@ const Services = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
     <section id="services" className="py-12 md:py-20 bg-[#F8FAFF]">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
           <span className="text-blue-700 text-xs font-semibold tracking-widest uppercase">
             WHAT WE OFFER
           </span>
@@ -49,13 +75,20 @@ const Services = () => {
           <p className="text-gray-500 text-base mt-3 max-w-xl mx-auto leading-relaxed">
             Professional painting solutions for every type of space
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"
+        >
           {services.map((service, index) => (
-            <div 
-              key={index} 
+            <motion.div 
+              key={index}
+              variants={itemVariants}
               className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition duration-300 group"
             >
               <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-blue-700 group-hover:bg-blue-700 group-hover:text-white transition-colors duration-300">
@@ -67,9 +100,9 @@ const Services = () => {
               <p className="text-gray-500 text-sm leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
